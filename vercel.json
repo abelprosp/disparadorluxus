@@ -1,0 +1,17 @@
+{
+  "version": 2,
+  "functions": {
+    "api/test.js": {
+      "maxDuration": 10
+    },
+    "api/health.js": {
+      "maxDuration": 10
+    },
+    "api/dispatch.js": {
+      "maxDuration": 60
+    },
+    "api/jobs/[id].js": {
+      "maxDuration": 10
+    }
+  }
+} 
