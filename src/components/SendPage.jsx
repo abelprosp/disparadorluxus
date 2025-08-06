@@ -14,8 +14,17 @@ const SendPage = () => {
   })
 
   // Detectar se está no Vercel ou local
-  const isVercel = window.location.hostname.includes('vercel.app')
+  const isVercel = window.location.hostname.includes('vercel.app') || 
+                   window.location.hostname.includes('vercel.com') ||
+                   window.location.hostname.includes('now.sh')
   const defaultBackendUrl = isVercel ? window.location.origin : 'http://localhost:3000'
+  
+  console.log('🔍 Debug - Ambiente detectado:', {
+    hostname: window.location.hostname,
+    origin: window.location.origin,
+    isVercel,
+    defaultBackendUrl
+  })
   const [jobId, setJobId] = useState(null)
   const [logs, setLogs] = useState([])
   const [isRunning, setIsRunning] = useState(false)
@@ -148,11 +157,17 @@ const SendPage = () => {
   }
 
   const testBackendConnection = async () => {
+    console.log('🔍 Testando conexão com:', `${defaultBackendUrl}/api/health`)
     try {
       const response = await axios.get(`${defaultBackendUrl}/api/health`)
-      alert('✅ Backend conectado com sucesso!')
+      console.log('✅ Resposta do health check:', response.data)
+      alert(`✅ Backend conectado com sucesso!\nStatus: ${response.data.status}\nAmbiente: ${response.data.environment}`)
     } catch (error) {
-      alert('❌ Erro ao conectar com o backend. Verifique se está rodando na porta correta.')
+      console.error('❌ Erro no health check:', error)
+      const errorMessage = error.response 
+        ? `Status: ${error.response.status}\nMensagem: ${error.response.data?.error || error.message}`
+        : `Erro: ${error.message}`
+      alert(`❌ Erro ao conectar com o backend.\n${errorMessage}`)
     }
   }
 
