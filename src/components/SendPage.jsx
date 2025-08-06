@@ -157,13 +157,13 @@ const SendPage = () => {
   }
 
   const testBackendConnection = async () => {
-    console.log('🔍 Testando conexão com:', `${defaultBackendUrl}/api/health`)
+    console.log('🔍 Testando conexão com:', `${defaultBackendUrl}/api/test`)
     try {
-      const response = await axios.get(`${defaultBackendUrl}/api/health`)
-      console.log('✅ Resposta do health check:', response.data)
-      alert(`✅ Backend conectado com sucesso!\nStatus: ${response.data.status}\nAmbiente: ${response.data.environment}`)
+      const response = await axios.get(`${defaultBackendUrl}/api/test`)
+      console.log('✅ Resposta do teste:', response.data)
+      alert(`✅ Backend conectado com sucesso!\nMensagem: ${response.data.message}`)
     } catch (error) {
-      console.error('❌ Erro no health check:', error)
+      console.error('❌ Erro no teste:', error)
       const errorMessage = error.response 
         ? `Status: ${error.response.status}\nMensagem: ${error.response.data?.error || error.message}`
         : `Erro: ${error.message}`
