@@ -9,7 +9,7 @@
     "server": "node backend/index.js",
     "dev:full": "node dev.js",
     "start": "node start.js",
-    "fly:deploy": "fly deploy"
+    "render:deploy": "npm run build && npm run server"
   },
   "dependencies": {
     "@clerk/clerk-react": "^5.38.1",

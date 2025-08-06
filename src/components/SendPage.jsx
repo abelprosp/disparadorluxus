@@ -13,16 +13,18 @@ const SendPage = () => {
     intervalSeconds: 50
   })
 
-  // Detectar se está no Fly.io, Vercel ou local
+  // Detectar se está no Render, Fly.io, Vercel ou local
+  const isRender = window.location.hostname.includes('onrender.com')
   const isFly = window.location.hostname.includes('fly.dev')
   const isVercel = window.location.hostname.includes('vercel.app') || 
                    window.location.hostname.includes('vercel.com') ||
                    window.location.hostname.includes('now.sh')
-  const defaultBackendUrl = isFly || isVercel ? window.location.origin : 'http://localhost:3000'
+  const defaultBackendUrl = isRender || isFly || isVercel ? window.location.origin : 'http://localhost:3000'
   
   console.log('🔍 Debug - Ambiente detectado:', {
     hostname: window.location.hostname,
     origin: window.location.origin,
+    isRender,
     isFly,
     isVercel,
     defaultBackendUrl
@@ -194,11 +196,13 @@ const SendPage = () => {
           </button>
         </div>
                  <small>
-           {isFly 
-             ? 'URL automática do Fly.io (Express server)' 
-             : isVercel 
-               ? 'URL automática do Vercel (API routes)' 
-               : 'URL local para desenvolvimento'
+           {isRender 
+             ? 'URL automática do Render (Express server)' 
+             : isFly 
+               ? 'URL automática do Fly.io (Express server)' 
+               : isVercel 
+                 ? 'URL automática do Vercel (API routes)' 
+                 : 'URL local para desenvolvimento'
            }
          </small>
       </div>

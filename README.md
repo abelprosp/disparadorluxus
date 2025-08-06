@@ -7,7 +7,7 @@ Sistema moderno para envio de mensagens WhatsApp em lote usando React + Vite no 
 - **Frontend**: React 18 + Vite
 - **Backend**: Node.js + Express
 - **Autenticação**: Clerk
-- **Deploy**: Fly.io
+- **Deploy**: Render
 
 ## 📋 Funcionalidades
 
@@ -18,7 +18,7 @@ Sistema moderno para envio de mensagens WhatsApp em lote usando React + Vite no 
 - ✅ Logs em tempo real
 - ✅ Estatísticas de envio
 - ✅ Interface moderna e responsiva
-- ✅ Deploy automático no Fly.io
+- ✅ Deploy automático no Render
 - ✅ Proteção de rotas
 
 ## 🛠️ Instalação e Desenvolvimento
@@ -71,52 +71,33 @@ npm run dev
 npm run build
 ```
 
-## 🚀 Deploy no Fly.io
+## 🚀 Deploy no Render
 
 ### Configuração Automática
 
-O projeto está configurado para deploy automático no Fly.io:
+O projeto está configurado para deploy automático no Render:
 
-1. **Instale o Fly CLI**:
-   ```bash
-   # Windows
-   iwr https://fly.io/install.ps1 -useb | iex
-   
-   # macOS
-   brew install flyctl
-   
-   # Linux
-   curl -L https://fly.io/install.sh | sh
-   ```
-
-2. **Login no Fly.io**:
-   ```bash
-   fly auth login
-   ```
-
-3. **Crie a aplicação**:
-   ```bash
-   fly apps create disparadorluxus
-   ```
-
-4. **Deploy**:
-   ```bash
-   fly deploy
-   ```
+1. **Crie uma conta** em [render.com](https://render.com)
+2. **Conecte** seu repositório GitHub
+3. **Configure** como Web Service:
+   - **Name**: `disparadorluxus`
+   - **Environment**: `Node`
+   - **Build Command**: `npm install && npm run build`
+   - **Start Command**: `npm start`
 
 ### Estrutura de Deploy
 
 ```
-Frontend (React) → /dist/ → Fly.io CDN
-Backend (Express) → /backend/ → Fly.io Server
+Frontend (React) → /dist/ → Render CDN
+Backend (Express) → /backend/ → Render Server
 Clerk Auth → Clerk CDN
 ```
 
 ### URLs de Produção
 
-- **Frontend**: `https://disparadorluxus.fly.dev`
-- **API Dispatch**: `https://disparadorluxus.fly.dev/api/dispatch`
-- **API Jobs**: `https://disparadorluxus.fly.dev/api/jobs/[id]`
+- **Frontend**: `https://disparadorluxus.onrender.com`
+- **API Dispatch**: `https://disparadorluxus.onrender.com/api/dispatch`
+- **API Jobs**: `https://disparadorluxus.onrender.com/api/jobs/[id]`
 
 ## 📁 Estrutura do Projeto
 
@@ -133,8 +114,6 @@ sistemanovo/
 ├── backend/                # Backend Express
 │   └── index.js           # Servidor
 ├── dist/                   # Build de produção
-├── fly.toml               # Configuração Fly.io
-├── Dockerfile             # Container Docker
 ├── package.json            # Dependências
 ├── start.js               # Script de inicialização
 └── CLERK_SETUP.md         # Guia de configuração Clerk
@@ -200,7 +179,7 @@ npm run build      # Build frontend
 npm run preview    # Preview build
 
 # Deploy
-fly deploy         # Deploy no Fly.io
+# Push para GitHub → Deploy automático no Render
 ```
 
 ## 📈 Monitoramento

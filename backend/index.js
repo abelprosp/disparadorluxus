@@ -12,8 +12,13 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Middleware
-app.use(cors());
-app.use(express.json());
+app.use(cors({
+  origin: process.env.NODE_ENV === 'production' 
+    ? ['https://disparadorluxus.onrender.com', 'https://disparadorluxus-frontend.onrender.com']
+    : true,
+  credentials: true
+}));
+app.use(express.json({ limit: '50mb' }));
 app.use(express.static(path.join(__dirname, '../dist')));
 
 // Simulação do jobStore
@@ -118,7 +123,8 @@ app.get('/api/health', (req, res) => {
     status: 'ok', 
     message: 'Backend funcionando',
     timestamp: new Date().toISOString(),
-    environment: process.env.NODE_ENV || 'development'
+    environment: process.env.NODE_ENV || 'development',
+    platform: 'Render'
   });
 });
 
@@ -160,8 +166,9 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../dist/index.html'));
 });
 
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
   console.log(`🚀 Servidor rodando na porta ${PORT}`);
   console.log(`📱 Frontend: http://localhost:${PORT}`);
   console.log(`🔧 API Health: http://localhost:${PORT}/api/health`);
+  console.log(`🌐 Platform: Render`);
 }); 
