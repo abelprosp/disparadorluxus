@@ -4,8 +4,7 @@ import { ClerkProvider } from '@clerk/clerk-react'
 import App from './App.jsx'
 import './index.css'
 
-// Chave pública do Clerk configurada - DESENVOLVIMENTO (temporário)
-// TODO: Trocar para produção quando o domínio estiver configurado
+// Chave pública do Clerk configurada
 const CLERK_PUBLISHABLE_KEY = 'pk_test_aGVscGZ1bC1jYWxmLTg5LmNsZXJrLmFjY291bnRzLmRldiQ'
 
 console.log('Iniciando aplicação com autenticação...')
