@@ -7,11 +7,15 @@ const SendPage = () => {
   const [config, setConfig] = useState({
     token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5hbnRJZCI6MTIsInByb2ZpbGUiOiJhZG1pbiIsInNlc3Npb25JZCI6NTYsImlhdCI6MTc0Nzc0Nzc2MiwiZXhwIjoxODEwODE5NzYyfQ.n04QYWLC-KAF3CGwIiSB1q0Aztk6AukAM9vdVS9eCYU',
     endpoint: 'https://api.mychatbot.awti.com.br/v2/api/external/f9e48b4d-cbd9-441d-a3e8-1529c1b1b530',
-    backendUrl: 'http://localhost:3000',
+    backendUrl: window.location.origin,
     externalKey: '',
     isClosed: true,
     intervalSeconds: 50
   })
+
+  // Detectar se está no Vercel ou local
+  const isVercel = window.location.hostname.includes('vercel.app')
+  const defaultBackendUrl = isVercel ? window.location.origin : 'http://localhost:3000'
   const [jobId, setJobId] = useState(null)
   const [logs, setLogs] = useState([])
   const [isRunning, setIsRunning] = useState(false)
@@ -45,7 +49,7 @@ const SendPage = () => {
     if (jobId && isRunning) {
       const interval = setInterval(async () => {
         try {
-          const response = await axios.get(`${config.backendUrl}/api/jobs/${jobId}`)
+          const response = await axios.get(`${defaultBackendUrl}/api/jobs/${jobId}`)
           const jobLogs = response.data.logs || []
           setLogs(jobLogs)
           
@@ -68,7 +72,7 @@ const SendPage = () => {
       
       return () => clearInterval(interval)
     }
-  }, [jobId, isRunning, csvData.length, config.backendUrl])
+  }, [jobId, isRunning, csvData.length, defaultBackendUrl])
 
   const handleFileUpload = (event) => {
     const file = event.target.files[0]
@@ -108,10 +112,10 @@ const SendPage = () => {
     })
 
     try {
-      console.log('Enviando para:', `${config.backendUrl}/api/dispatch`)
+      console.log('Enviando para:', `${defaultBackendUrl}/api/dispatch`)
       console.log('Dados:', { csvData, ...config })
       
-      const response = await axios.post(`${config.backendUrl}/api/dispatch`, {
+      const response = await axios.post(`${defaultBackendUrl}/api/dispatch`, {
         csvData,
         ...config
       })
@@ -145,7 +149,7 @@ const SendPage = () => {
 
   const testBackendConnection = async () => {
     try {
-      const response = await axios.get(`${config.backendUrl}/api/health`)
+      const response = await axios.get(`${defaultBackendUrl}/api/health`)
       alert('✅ Backend conectado com sucesso!')
     } catch (error) {
       alert('❌ Erro ao conectar com o backend. Verifique se está rodando na porta correta.')
@@ -161,10 +165,9 @@ const SendPage = () => {
         <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
           <input
             type="url"
-            value={config.backendUrl}
-            onChange={(e) => handleConfigChange('backendUrl', e.target.value)}
-            placeholder="http://localhost:3000"
-            style={{ flex: 1 }}
+            value={defaultBackendUrl}
+            readOnly
+            style={{ flex: 1, backgroundColor: '#f5f5f5' }}
           />
           <button 
             onClick={testBackendConnection}
@@ -173,7 +176,12 @@ const SendPage = () => {
             Testar Conexão
           </button>
         </div>
-        <small>URL onde o backend está rodando (ex: http://localhost:3000)</small>
+        <small>
+          {isVercel 
+            ? 'URL automática do Vercel (API routes)' 
+            : 'URL local para desenvolvimento'
+          }
+        </small>
       </div>
 
       <div className="form-group">

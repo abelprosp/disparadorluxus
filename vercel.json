@@ -5,11 +5,16 @@
       "src": "package.json",
       "use": "@vercel/static-build",
       "config": {
-        "distDir": "dist"
+        "distDir": "dist",
+        "buildCommand": "npm run vercel-build"
       }
     }
   ],
   "routes": [
+    {
+      "src": "/api/health",
+      "dest": "/api/health.js"
+    },
     {
       "src": "/api/dispatch",
       "dest": "/api/dispatch.js"
