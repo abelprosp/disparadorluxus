@@ -9,22 +9,18 @@
       }
     }
   ],
-  "routes": [
-    {
-      "src": "/api/health",
-      "dest": "/api/health.js"
+  "functions": {
+    "api/test.js": {
+      "maxDuration": 10
     },
-    {
-      "src": "/api/dispatch",
-      "dest": "/api/dispatch.js"
+    "api/health.js": {
+      "maxDuration": 10
     },
-    {
-      "src": "/api/jobs/(.*)",
-      "dest": "/api/jobs/[id].js"
+    "api/dispatch.js": {
+      "maxDuration": 60
     },
-    {
-      "src": "/(.*)",
-      "dest": "/dist/$1"
+    "api/jobs/[id].js": {
+      "maxDuration": 10
     }
-  ]
+  }
 } 
