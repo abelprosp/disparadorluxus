@@ -23,14 +23,6 @@
       "dest": "/dist/$1"
     }
   ],
-  "functions": {
-    "api/dispatch.js": {
-      "maxDuration": 30
-    },
-    "api/jobs/[id].js": {
-      "maxDuration": 10
-    }
-  },
   "env": {
     "NODE_ENV": "production",
     "VITE_CLERK_PUBLISHABLE_KEY": "pk_test_aGVscGZ1bC1jYWxmLTg5LmNsZXJrLmFjY291bnRzLmRldiQ",
