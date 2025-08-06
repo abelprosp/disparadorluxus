@@ -1,0 +1,20 @@
+{
+  "development": {
+    "backend": {
+      "port": 3000,
+      "host": "localhost"
+    },
+    "frontend": {
+      "port": 5173,
+      "host": "localhost"
+    },
+    "api": {
+      "baseUrl": "http://localhost:3000/api"
+    }
+  },
+  "production": {
+    "api": {
+      "baseUrl": "/api"
+    }
+  }
+} 

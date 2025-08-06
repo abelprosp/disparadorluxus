@@ -1,0 +1,39 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "dist"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/dispatch",
+      "dest": "/api/dispatch.js"
+    },
+    {
+      "src": "/api/jobs/(.*)",
+      "dest": "/api/jobs/[id].js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/dist/$1"
+    }
+  ],
+  "functions": {
+    "api/dispatch.js": {
+      "maxDuration": 30
+    },
+    "api/jobs/[id].js": {
+      "maxDuration": 10
+    }
+  },
+  "env": {
+    "NODE_ENV": "production",
+    "VITE_CLERK_PUBLISHABLE_KEY": "pk_test_aGVscGZ1bC1jYWxmLTg5LmNsZXJrLmFjY291bnRzLmRldiQ",
+    "CLERK_SECRET_KEY": "sk_test_ZmAFlAp3QbsMZwH7k8i2ZZ4yU1GiiGsle3ec0OP22x"
+  }
+} 

@@ -1,0 +1,259 @@
+[
+  {
+    "id": "04675c65-36a1-4387-890a-57e25883267e",
+    "csvData": [
+      {
+        "number": "5551995501677",
+        "text": "ola tudo bem?",
+        "image_url": ""
+      },
+      {
+        "number": "5551995501677",
+        "text": "ola tudo bem?",
+        "image_url": ""
+      },
+      {
+        "number": ""
+      }
+    ],
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5hbnRJZCI6MTIsInByb2ZpbGUiOiJhZG1pbiIsInNlc3Npb25JZCI6NTYsImlhdCI6MTc0Nzc0Nzc2MiwiZXhwIjoxODEwODE5NzYyfQ.n04QYWLC-KAF3CGwIiSB1q0Aztk6AukAM9vdVS9eCYU",
+    "endpoint": "https://api.mychatbot.awti.com.br/v2/api/external/f9e48b4d-cbd9-441d-a3e8-1529c1b1b530",
+    "externalKey": "123",
+    "isClosed": true,
+    "intervalSeconds": 50,
+    "currentIndex": 3,
+    "logs": [
+      {
+        "number": "5551995501677",
+        "success": true,
+        "messageType": "text",
+        "hasImage": false,
+        "timestamp": "2025-08-06T14:10:09.841Z"
+      },
+      {
+        "number": "5551995501677",
+        "success": true,
+        "messageType": "text",
+        "hasImage": false,
+        "timestamp": "2025-08-06T14:11:02.262Z"
+      },
+      {
+        "number": "",
+        "success": false,
+        "error": "HTTP 400: number is a required field",
+        "messageType": "text",
+        "hasImage": false,
+        "timestamp": "2025-08-06T14:11:52.364Z"
+      }
+    ],
+    "createdAt": "2025-08-06T14:10:07.048Z",
+    "status": "completed",
+    "completedAt": "2025-08-06T14:12:42.373Z"
+  },
+  {
+    "id": "c476f7ad-b527-46fa-9f24-4201d182c391",
+    "csvData": [
+      {
+        "number": "5551995501677",
+        "text": "ola tudo bem?",
+        "image_url": ""
+      },
+      {
+        "number": "5551995501677",
+        "text": "ola tudo bem?",
+        "image_url": ""
+      },
+      {
+        "number": ""
+      }
+    ],
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5hbnRJZCI6MTIsInByb2ZpbGUiOiJhZG1pbiIsInNlc3Npb25JZCI6NTYsImlhdCI6MTc0Nzc0Nzc2MiwiZXhwIjoxODEwODE5NzYyfQ.n04QYWLC-KAF3CGwIiSB1q0Aztk6AukAM9vdVS9eCYU",
+    "endpoint": "https://api.mychatbot.awti.com.br/v2/api/external/f9e48b4d-cbd9-441d-a3e8-1529c1b1b530",
+    "externalKey": "123",
+    "isClosed": true,
+    "intervalSeconds": 50,
+    "currentIndex": 3,
+    "logs": [
+      {
+        "number": "5551995501677",
+        "success": true,
+        "messageType": "text",
+        "hasImage": false,
+        "timestamp": "2025-08-06T14:11:20.914Z"
+      },
+      {
+        "number": "5551995501677",
+        "success": true,
+        "messageType": "text",
+        "hasImage": false,
+        "timestamp": "2025-08-06T14:12:13.467Z"
+      },
+      {
+        "number": "",
+        "success": false,
+        "error": "HTTP 400: number is a required field",
+        "messageType": "text",
+        "hasImage": false,
+        "timestamp": "2025-08-06T14:13:03.557Z"
+      }
+    ],
+    "createdAt": "2025-08-06T14:11:18.512Z",
+    "status": "completed",
+    "completedAt": "2025-08-06T14:13:53.574Z"
+  },
+  {
+    "id": "b3d69eaf-3df1-4734-b18a-b24647fe2341",
+    "csvData": [
+      {
+        "number": "5551995501677",
+        "text": "ola tudo bem?",
+        "image_url": ""
+      },
+      {
+        "number": "5551995501677",
+        "text": "ola tudo bem?",
+        "image_url": ""
+      },
+      {
+        "number": ""
+      }
+    ],
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5hbnRJZCI6MTIsInByb2ZpbGUiOiJhZG1pbiIsInNlc3Npb25JZCI6NTYsImlhdCI6MTc0Nzc0Nzc2MiwiZXhwIjoxODEwODE5NzYyfQ.n04QYWLC-KAF3CGwIiSB1q0Aztk6AukAM9vdVS9eCYU",
+    "endpoint": "https://api.mychatbot.awti.com.br/v2/api/external/f9e48b4d-cbd9-441d-a3e8-1529c1b1b530",
+    "externalKey": "123",
+    "isClosed": true,
+    "intervalSeconds": 50,
+    "currentIndex": 3,
+    "logs": [
+      {
+        "number": "5551995501677",
+        "success": true,
+        "messageType": "text",
+        "hasImage": false,
+        "timestamp": "2025-08-06T14:28:28.080Z"
+      },
+      {
+        "number": "5551995501677",
+        "success": true,
+        "messageType": "text",
+        "hasImage": false,
+        "timestamp": "2025-08-06T14:29:20.489Z"
+      },
+      {
+        "number": "",
+        "success": false,
+        "error": "HTTP 400: number is a required field",
+        "messageType": "text",
+        "hasImage": false,
+        "timestamp": "2025-08-06T14:30:10.583Z"
+      }
+    ],
+    "createdAt": "2025-08-06T14:28:25.509Z",
+    "status": "completed",
+    "completedAt": "2025-08-06T14:31:00.588Z"
+  },
+  {
+    "id": "d1f47114-5bee-4b75-8d55-a36a380df831",
+    "csvData": [
+      {
+        "number": "5551995501677",
+        "text": "ola tudo bem?",
+        "image_url": ""
+      },
+      {
+        "number": "5551995501677",
+        "text": "ola tudo bem?",
+        "image_url": ""
+      },
+      {
+        "number": ""
+      }
+    ],
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5hbnRJZCI6MTIsInByb2ZpbGUiOiJhZG1pbiIsInNlc3Npb25JZCI6NTYsImlhdCI6MTc0Nzc0Nzc2MiwiZXhwIjoxODEwODE5NzYyfQ.n04QYWLC-KAF3CGwIiSB1q0Aztk6AukAM9vdVS9eCYU",
+    "endpoint": "https://api.mychatbot.awti.com.br/v2/api/external/f9e48b4d-cbd9-441d-a3e8-1529c1b1b530",
+    "externalKey": "",
+    "isClosed": true,
+    "intervalSeconds": 50,
+    "currentIndex": 3,
+    "logs": [
+      {
+        "number": "5551995501677",
+        "success": false,
+        "error": "HTTP 400: externalKey is a required field",
+        "messageType": "text",
+        "hasImage": false,
+        "timestamp": "2025-08-06T16:30:42.041Z"
+      },
+      {
+        "number": "5551995501677",
+        "success": false,
+        "error": "HTTP 400: externalKey is a required field",
+        "messageType": "text",
+        "hasImage": false,
+        "timestamp": "2025-08-06T16:31:32.147Z"
+      },
+      {
+        "number": "",
+        "success": false,
+        "error": "HTTP 400: externalKey is a required field",
+        "messageType": "text",
+        "hasImage": false,
+        "timestamp": "2025-08-06T16:32:22.276Z"
+      }
+    ],
+    "createdAt": "2025-08-06T16:30:41.830Z",
+    "status": "completed",
+    "completedAt": "2025-08-06T16:33:12.286Z"
+  },
+  {
+    "id": "9771ca6c-0fda-4666-8c30-aaf0c89df97b",
+    "csvData": [
+      {
+        "number": "5551995501677",
+        "text": "ola tudo bem?",
+        "image_url": ""
+      },
+      {
+        "number": "5551995501677",
+        "text": "ola tudo bem?",
+        "image_url": ""
+      },
+      {
+        "number": ""
+      }
+    ],
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5hbnRJZCI6MTIsInByb2ZpbGUiOiJhZG1pbiIsInNlc3Npb25JZCI6NTYsImlhdCI6MTc0Nzc0Nzc2MiwiZXhwIjoxODEwODE5NzYyfQ.n04QYWLC-KAF3CGwIiSB1q0Aztk6AukAM9vdVS9eCYU",
+    "endpoint": "https://api.mychatbot.awti.com.br/v2/api/external/f9e48b4d-cbd9-441d-a3e8-1529c1b1b530",
+    "externalKey": "123",
+    "isClosed": true,
+    "intervalSeconds": 50,
+    "currentIndex": 3,
+    "logs": [
+      {
+        "number": "5551995501677",
+        "success": true,
+        "messageType": "text",
+        "hasImage": false,
+        "timestamp": "2025-08-06T16:30:58.015Z"
+      },
+      {
+        "number": "5551995501677",
+        "success": true,
+        "messageType": "text",
+        "hasImage": false,
+        "timestamp": "2025-08-06T16:31:50.450Z"
+      },
+      {
+        "number": "",
+        "success": false,
+        "error": "HTTP 400: number is a required field",
+        "messageType": "text",
+        "hasImage": false,
+        "timestamp": "2025-08-06T16:32:40.559Z"
+      }
+    ],
+    "createdAt": "2025-08-06T16:30:55.595Z",
+    "status": "completed",
+    "completedAt": "2025-08-06T16:33:30.565Z"
+  }
+]
