@@ -1,13 +1,13 @@
 # Sistema de Disparo WhatsApp
 
-Sistema moderno para envio de mensagens WhatsApp em lote usando React + Vite no frontend, API routes no Vercel e autenticação com Clerk.
+Sistema moderno para envio de mensagens WhatsApp em lote usando React + Vite no frontend, Express.js no backend e autenticação com Clerk.
 
 ## 🚀 Tecnologias
 
 - **Frontend**: React 18 + Vite
-- **Backend**: Vercel API Routes (serverless)
+- **Backend**: Node.js + Express
 - **Autenticação**: Clerk
-- **Deploy**: Vercel
+- **Deploy**: Fly.io
 
 ## 📋 Funcionalidades
 
@@ -18,7 +18,7 @@ Sistema moderno para envio de mensagens WhatsApp em lote usando React + Vite no 
 - ✅ Logs em tempo real
 - ✅ Estatísticas de envio
 - ✅ Interface moderna e responsiva
-- ✅ Deploy automático no Vercel
+- ✅ Deploy automático no Fly.io
 - ✅ Proteção de rotas
 
 ## 🛠️ Instalação e Desenvolvimento
@@ -71,30 +71,52 @@ npm run dev
 npm run build
 ```
 
-## 🚀 Deploy no Vercel
+## 🚀 Deploy no Fly.io
 
 ### Configuração Automática
 
-O projeto está configurado para deploy automático no Vercel:
+O projeto está configurado para deploy automático no Fly.io:
 
-1. **Conecte o repositório** ao Vercel
-2. **Variáveis de ambiente já configuradas** no `vercel.json`
-3. **Deploy automático** - não precisa de configuração adicional
-4. **API Routes** - funcionam como serverless functions
+1. **Instale o Fly CLI**:
+   ```bash
+   # Windows
+   iwr https://fly.io/install.ps1 -useb | iex
+   
+   # macOS
+   brew install flyctl
+   
+   # Linux
+   curl -L https://fly.io/install.sh | sh
+   ```
+
+2. **Login no Fly.io**:
+   ```bash
+   fly auth login
+   ```
+
+3. **Crie a aplicação**:
+   ```bash
+   fly apps create disparadorluxus
+   ```
+
+4. **Deploy**:
+   ```bash
+   fly deploy
+   ```
 
 ### Estrutura de Deploy
 
 ```
-Frontend (React) → /dist/ → Vercel CDN
-API Routes → /api/* → Vercel Functions
+Frontend (React) → /dist/ → Fly.io CDN
+Backend (Express) → /backend/ → Fly.io Server
 Clerk Auth → Clerk CDN
 ```
 
 ### URLs de Produção
 
-- **Frontend**: `https://seu-projeto.vercel.app`
-- **API Dispatch**: `https://seu-projeto.vercel.app/api/dispatch`
-- **API Jobs**: `https://seu-projeto.vercel.app/api/jobs/[id]`
+- **Frontend**: `https://disparadorluxus.fly.dev`
+- **API Dispatch**: `https://disparadorluxus.fly.dev/api/dispatch`
+- **API Jobs**: `https://disparadorluxus.fly.dev/api/jobs/[id]`
 
 ## 📁 Estrutura do Projeto
 
@@ -108,13 +130,12 @@ sistemanovo/
 │       ├── SendPage.jsx   # Página principal
 │       ├── ConfigPage.jsx # Configurações
 │       └── LogsPage.jsx   # Logs
-├── api/                    # Vercel API routes
-│   ├── dispatch.js         # API para envio
-│   └── jobs/[id].js       # API para logs
-├── backend/                # Backend local (desenvolvimento)
+├── backend/                # Backend Express
+│   └── index.js           # Servidor
 ├── dist/                   # Build de produção
+├── fly.toml               # Configuração Fly.io
+├── Dockerfile             # Container Docker
 ├── package.json            # Dependências
-├── vercel.json            # Configuração Vercel
 ├── start.js               # Script de inicialização
 └── CLERK_SETUP.md         # Guia de configuração Clerk
 ```
@@ -179,7 +200,7 @@ npm run build      # Build frontend
 npm run preview    # Preview build
 
 # Deploy
-vercel --prod      # Deploy no Vercel
+fly deploy         # Deploy no Fly.io
 ```
 
 ## 📈 Monitoramento

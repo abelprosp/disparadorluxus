@@ -1,46 +1,38 @@
 import express from 'express';
+import cors from 'cors';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import fetch from 'node-fetch';
 import { v4 as uuidv4 } from 'uuid';
-import cors from 'cors';
-import { fileURLToPath } from 'url';
-import { dirname, join } from 'path';
-import { addJob, updateJob, getJob } from './jobStore.js';
 
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+const __dirname = path.dirname(__filename);
 
 const app = express();
+const PORT = process.env.PORT || 3000;
+
+// Middleware
 app.use(cors());
-app.use(express.json({ limit: '50mb' }));
+app.use(express.json());
+app.use(express.static(path.join(__dirname, '../dist')));
 
-// Serve static files from the dist directory (built React app)
-app.use(express.static(join(__dirname, '../dist')));
+// Simulação do jobStore
+const jobs = new Map();
 
-// Rota de health check
-app.get('/api/health', (req, res) => {
-  res.json({ status: 'ok', message: 'Backend funcionando' })
-})
+function addJob(job) {
+  jobs.set(job.id, job);
+}
 
-// Rota para iniciar disparo
-app.post('/api/dispatch', (req, res) => {
-  const {
-    csvData, token, endpoint, externalKey,
-    isClosed, intervalSeconds
-  } = req.body;
+function updateJob(id, updates) {
+  const job = jobs.get(id);
+  if (job) {
+    jobs.set(id, { ...job, ...updates });
+  }
+}
 
-  const jobId = uuidv4();
-  addJob({
-    id: jobId,
-    csvData, token, endpoint, externalKey,
-    isClosed, intervalSeconds,
-    currentIndex: 0,
-    logs: [],
-    createdAt: new Date().toISOString()
-  });
-
-  setImmediate(() => sendNext(jobId));
-  res.json({ jobId });
-});
+function getJob(id) {
+  return jobs.get(id);
+}
 
 async function sendNext(jobId) {
   const job = getJob(jobId);
@@ -62,7 +54,7 @@ async function sendNext(jobId) {
   // Determina o tipo de mensagem baseado no conteúdo
   const messageType = imageUrl ? 'image_text' : 'text';
   
-  // Usar sempre o mesmo endpoint, não adicionar /url
+  // Usar sempre o mesmo endpoint
   const url = job.endpoint;
 
   const body = {
@@ -76,43 +68,20 @@ async function sendNext(jobId) {
     body.mediaUrl = imageUrl;
   }
 
-  console.log(`=== ENVIANDO MENSAGEM ${job.currentIndex + 1}/${job.csvData.length} ===`);
-  console.log(`URL: ${url}`);
-  console.log(`Token: ${job.token.substring(0, 20)}...`);
-  console.log(`Body:`, JSON.stringify(body, null, 2));
-
   let logEntry;
   try {
-    // Primeiro, vamos testar se o endpoint está acessível
-    console.log('Testando conectividade com o endpoint...');
-    
     const res = await fetch(url, {
       method: 'POST',
       headers: {
         'Authorization': 'Bearer ' + job.token,
-        'Content-Type': 'application/json',
-        'User-Agent': 'Dispatch-System/1.0'
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify(body)
     });
     
-    console.log(`Status: ${res.status}`);
-    console.log(`Status Text: ${res.statusText}`);
-    console.log(`Headers:`, Object.fromEntries(res.headers.entries()));
+    const data = await res.json().catch(() => ({}));
     
-    let data = {};
-    try {
-      data = await res.json();
-      console.log(`Response JSON:`, data);
-    } catch (jsonError) {
-      const textResponse = await res.text();
-      console.log(`Response Text:`, textResponse);
-    }
-    
-    if (!res.ok) {
-      throw new Error(`HTTP ${res.status}: ${data.error || data.message || res.statusText}`);
-    }
-    
+    if (!res.ok) throw new Error(data.error || data.message || `Status ${res.status}`);
     logEntry = { 
       number, 
       success: true, 
@@ -120,10 +89,7 @@ async function sendNext(jobId) {
       hasImage: !!imageUrl,
       timestamp: new Date().toISOString() 
     };
-    console.log(`✅ Mensagem enviada com sucesso para ${number}`);
   } catch (err) {
-    console.error(`❌ Erro ao enviar para ${number}:`, err.message);
-    console.error(`Stack trace:`, err.stack);
     logEntry = { 
       number, 
       success: false, 
@@ -137,21 +103,65 @@ async function sendNext(jobId) {
   const updatedLogs = [...job.logs, logEntry];
   updateJob(jobId, { logs: updatedLogs, currentIndex: job.currentIndex + 1 });
 
-  setTimeout(() => sendNext(jobId), job.intervalSeconds * 1000);
+  // Para serverless, não podemos usar setTimeout
+  // Em vez disso, vamos processar imediatamente
+  if (job.currentIndex + 1 < job.csvData.length) {
+    // Simular delay usando Promise
+    await new Promise(resolve => setTimeout(resolve, job.intervalSeconds * 1000));
+    await sendNext(jobId);
+  }
 }
 
+// API Routes
+app.get('/api/health', (req, res) => {
+  res.json({ 
+    status: 'ok', 
+    message: 'Backend funcionando',
+    timestamp: new Date().toISOString(),
+    environment: process.env.NODE_ENV || 'development'
+  });
+});
+
+app.post('/api/dispatch', async (req, res) => {
+  const {
+    csvData, token, endpoint, externalKey,
+    isClosed, intervalSeconds
+  } = req.body;
+
+  const jobId = uuidv4();
+  addJob({
+    id: jobId,
+    csvData, token, endpoint, externalKey,
+    isClosed, intervalSeconds,
+    currentIndex: 0,
+    logs: [],
+    createdAt: new Date().toISOString()
+  });
+
+  // Inicia o processamento em background
+  sendNext(jobId).catch(console.error);
+  
+  res.json({ jobId });
+});
+
 app.get('/api/jobs/:id', (req, res) => {
-  const job = getJob(req.params.id);
+  const { id } = req.params;
+  
+  const job = getJob(id);
   if (!job) {
     return res.status(404).json({ error: 'Job não encontrado' });
   }
+  
   res.json({ logs: job.logs });
 });
 
 // Serve React app for all other routes
 app.get('*', (req, res) => {
-  res.sendFile(join(__dirname, '../dist/index.html'));
+  res.sendFile(path.join(__dirname, '../dist/index.html'));
 });
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Backend ouvindo na porta ${PORT}`)); 
+app.listen(PORT, () => {
+  console.log(`🚀 Servidor rodando na porta ${PORT}`);
+  console.log(`📱 Frontend: http://localhost:${PORT}`);
+  console.log(`🔧 API Health: http://localhost:${PORT}/api/health`);
+}); 
