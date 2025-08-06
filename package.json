@@ -8,8 +8,7 @@
     "preview": "vite preview",
     "server": "node backend/index.js",
     "dev:full": "node dev.js",
-    "start": "node start.js",
-    "vercel-build": "node vercel-build.js"
+    "start": "node start.js"
   },
   "dependencies": {
     "@clerk/clerk-react": "^5.38.1",
