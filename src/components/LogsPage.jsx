@@ -39,7 +39,7 @@ const LogsPage = () => {
   const stats = getStats()
 
   return (
-    <div className="container">
+    <div className="container-logs">
       <h2>Visualizar Logs</h2>
       
       <div className="form-group">

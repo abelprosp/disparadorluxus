@@ -82,7 +82,7 @@ const ConfigPage = () => {
   }
 
   return (
-    <div className="container">
+    <div className="container container-config">
       <h2>Configurações</h2>
       
       <div className="form-group">

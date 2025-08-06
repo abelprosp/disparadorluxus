@@ -11,6 +11,7 @@ function App() {
   
   const { isSignedIn, isLoaded, user } = useAuth()
   const [currentPage, setCurrentPage] = useState('send')
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   console.log('Auth state:', { isSignedIn, isLoaded, user })
 
@@ -46,36 +47,41 @@ function App() {
     }
   }
 
+  const handlePageChange = (page) => {
+    setCurrentPage(page)
+    setIsMenuOpen(false) // Fecha o menu ao trocar de página
+  }
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen)
+  }
+
   return (
     <div className="app">
-      <header className="header">
-        <div className="header-content">
-          <h1>Sistema de Disparo WhatsApp</h1>
-          <div className="user-section">
-            <span className="user-email">
-              {user?.primaryEmailAddress?.emailAddress || 'Usuário'}
-            </span>
-            <SignOutButton className="btn btn-outline" />
-          </div>
-        </div>
-      </header>
+      <div className="top-controls">
+        <button 
+          className={`hamburger-menu ${isMenuOpen ? 'active' : ''}`}
+          onClick={toggleMenu}
+        >
+          <div className="hamburger-line"></div>
+          <div className="hamburger-line"></div>
+          <div className="hamburger-line"></div>
+        </button>
+        <SignOutButton className="btn btn-outline" />
+      </div>
 
-      <nav className="navigation">
+      <nav className={`navigation ${isMenuOpen ? 'active' : ''}`}>
         <button 
           className={`nav-btn ${currentPage === 'send' ? 'active' : ''}`}
-          onClick={() => setCurrentPage('send')}
+          onClick={() => handlePageChange('send')}
         >
           Enviar Mensagens
         </button>
-        <button 
-          className={`nav-btn ${currentPage === 'config' ? 'active' : ''}`}
-          onClick={() => setCurrentPage('config')}
-        >
-          Configurações
-        </button>
+        
+        
         <button 
           className={`nav-btn ${currentPage === 'logs' ? 'active' : ''}`}
-          onClick={() => setCurrentPage('logs')}
+          onClick={() => handlePageChange('logs')}
         >
           Logs
         </button>
