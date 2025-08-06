@@ -4,9 +4,7 @@ import { SignIn } from '@clerk/clerk-react'
 const LoginPage = () => {
   return (
     <div className="login-container">
-      <div className="login-card">
-        <h1>Sistema de Disparo WhatsApp</h1>
-        <p>Faça login para acessar o sistema</p>
+     
         <SignIn 
           appearance={{
             elements: {
@@ -32,7 +30,7 @@ const LoginPage = () => {
           }}
         />
       </div>
-    </div>
+    
   )
 }
 

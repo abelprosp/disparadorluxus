@@ -4,8 +4,8 @@ import { ClerkProvider } from '@clerk/clerk-react'
 import App from './App.jsx'
 import './index.css'
 
-// Chave pública do Clerk configurada
-const CLERK_PUBLISHABLE_KEY = 'pk_test_aGVscGZ1bC1jYWxmLTg5LmNsZXJrLmFjY291bnRzLmRldiQ'
+// Chave pública do Clerk configurada - PRODUÇÃO
+const CLERK_PUBLISHABLE_KEY = 'pk_live_Y2xlcmsuZXZvbHV4cmguY29tLmJyJA'
 
 console.log('Iniciando aplicação com autenticação...')
 console.log('Clerk Key:', CLERK_PUBLISHABLE_KEY)

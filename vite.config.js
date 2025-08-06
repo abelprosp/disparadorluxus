@@ -18,6 +18,6 @@ export default defineConfig({
     assetsDir: 'assets'
   },
   define: {
-    'process.env.VITE_CLERK_PUBLISHABLE_KEY': JSON.stringify('pk_test_aGVscGZ1bC1jYWxmLTg5LmNsZXJrLmFjY291bnRzLmRldiQ')
+    'process.env.VITE_CLERK_PUBLISHABLE_KEY': JSON.stringify('pk_live_Y2xlcmsuZXZvbHV4cmguY29tLmJyJA')
   }
 }) 
