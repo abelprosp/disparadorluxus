@@ -157,9 +157,9 @@ const SendPage = () => {
   }
 
   const testBackendConnection = async () => {
-    console.log('🔍 Testando conexão com:', `${defaultBackendUrl}/api/test`)
+    console.log('🔍 Testando conexão com:', `${defaultBackendUrl}/api/hello`)
     try {
-      const response = await axios.get(`${defaultBackendUrl}/api/test`)
+      const response = await axios.get(`${defaultBackendUrl}/api/hello`)
       console.log('✅ Resposta do teste:', response.data)
       alert(`✅ Backend conectado com sucesso!\nMensagem: ${response.data.message}`)
     } catch (error) {
