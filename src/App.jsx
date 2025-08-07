@@ -3,6 +3,7 @@ import { useAuth, SignOutButton } from '@clerk/clerk-react'
 import SendPage from './components/SendPage'
 import ConfigPage from './components/ConfigPage'
 import LogsPage from './components/LogsPage'
+import DocsPage from './components/DocsPage'
 import LoginPage from './components/LoginPage'
 import './App.css'
 
@@ -42,6 +43,8 @@ function App() {
         return <ConfigPage />
       case 'logs':
         return <LogsPage />
+      case 'docs':
+        return <DocsPage />
       default:
         return <SendPage />
     }
@@ -78,12 +81,18 @@ function App() {
           Enviar Mensagens
         </button>
         
-        
         <button 
           className={`nav-btn ${currentPage === 'logs' ? 'active' : ''}`}
           onClick={() => handlePageChange('logs')}
         >
           Logs
+        </button>
+        
+        <button 
+          className={`nav-btn ${currentPage === 'docs' ? 'active' : ''}`}
+          onClick={() => handlePageChange('docs')}
+        >
+          📚 Documentação
         </button>
       </nav>
 
