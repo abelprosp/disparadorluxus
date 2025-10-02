@@ -34,7 +34,13 @@ async function sendNext(jobId) {
   const row = job.csvData[job.currentIndex];
   const number = row.number;
   const messageText = row.text || '';
-  const imageUrl = row.image_url || '';
+  let imageUrl = row.image_url || '';
+  
+  // Validar URL da imagem
+  if (imageUrl && !imageUrl.match(/^https?:\/\/.+/i)) {
+    console.log('URL de imagem inválida:', imageUrl);
+    imageUrl = ''; // Limpa URL inválida
+  }
 
   // Determina o tipo de mensagem baseado no conteúdo
   const messageType = imageUrl ? 'image_text' : 'text';
@@ -50,7 +56,9 @@ async function sendNext(jobId) {
   };
 
   if (messageType === 'image_text' && imageUrl) {
-    body.mediaUrl = imageUrl;
+    // Corrigindo o campo para envio de imagem conforme a API espera
+    body.fileUrl = imageUrl;
+    console.log('Enviando imagem:', imageUrl);
   }
 
   let logEntry;
@@ -131,4 +139,4 @@ export default async function handler(req, res) {
   } else {
     res.status(405).json({ error: 'Method not allowed' });
   }
-} 
+}
