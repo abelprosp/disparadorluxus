@@ -1,6 +1,6 @@
 number,text,image_url
-5511999999999,Olá! Como vai?,https://exemplo.com/imagem1.jpg
+5511999999999,Olá! Como vai?,https://picsum.photos/400/300?random=1
 5511888888888,Segunda mensagem de teste,
-5511777777777,Terceira mensagem com imagem,https://exemplo.com/imagem2.jpg
+5511777777777,Terceira mensagem com imagem,https://picsum.photos/400/300?random=2
 5511666666666,Mensagem apenas texto,
-5511555555555,Última mensagem,https://exemplo.com/imagem3.jpg 
+5511555555555,Última mensagem,https://picsum.photos/400/300?random=3

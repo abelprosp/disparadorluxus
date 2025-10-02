@@ -32,9 +32,10 @@ async function sendNext(jobId) {
   }
 
   const row = job.csvData[job.currentIndex];
-  const number = row.number;
-  const messageText = row.text || '';
-  let imageUrl = row.image_url || '';
+  // Suporte para diferentes formatos de coluna no CSV
+  const number = row.number || row.numero;
+  const messageText = row.text || row.mensagem || '';
+  let imageUrl = row.image_url || row.imagem || '';
   
   // Validar URL da imagem
   if (imageUrl && !imageUrl.match(/^https?:\/\/.+/i)) {

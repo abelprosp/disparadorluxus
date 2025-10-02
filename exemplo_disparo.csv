@@ -1,6 +1,2 @@
-numero,mensagem,imagem
-5511999999999,Olá! Bem-vindo ao nosso sistema de disparo de mensagens.,https://exemplo.com/welcome.jpg
-5511888888888,Obrigado por escolher nossos serviços. Estamos aqui para ajudar!,https://exemplo.com/thanks.jpg
-5511777777777,Promoção especial para você! Aproveite nossos descontos.,https://exemplo.com/promo.jpg
-5511666666666,Novidades chegando! Fique atento às nossas atualizações.,https://exemplo.com/news.jpg
-5511555555555,Suporte técnico disponível 24/7. Entre em contato conosco!,https://exemplo.com/support.jpg 
+number,text,image_url
+5551995501677,Olá! Bem-vindo ao nosso sistema de disparo de mensagens.,https://picsum.photos/400/300?random=1
